@@ -14,7 +14,7 @@
 </p>
 <p align="center">
     <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">
-        <img src="https://img.shields.io/github/license/danielscholte/ArrowLog.svg?style=for-the-badge">
+        <img alt="GPL-3.0" src="https://img.shields.io/github/license/danielscholte/arrowlog.svg?style=for-the-badge">
     </a>
     <a href="https://github.com/danielscholte/ArrowLog/stargazers" target="_blank">
         <img alt="GitHub Stars" src="https://img.shields.io/github/stars/danielscholte/ArrowLog.svg?style=for-the-badge">
