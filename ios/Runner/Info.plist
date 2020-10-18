@@ -43,5 +43,7 @@
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Saving sessions as images in your photo library</string>
 </dict>
 </plist>
