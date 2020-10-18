@@ -1,0 +1,4 @@
+storePassword=
+keyPassword=
+keyAlias=ArrowLogKey
+storeFile=../signing_key.jks

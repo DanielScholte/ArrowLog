@@ -1,0 +1,6 @@
+<b>ArrowLog helps you keep track of your archery sessions.</b>
+
+<b>Features</b>
+• Log archery sessions.
+• Export archery sessions to easily shareable pictures.
+• Upcoming features: session statistics and tracking of archery gear.
