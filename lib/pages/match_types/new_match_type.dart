@@ -85,6 +85,7 @@ class _NewMatchTypePageState extends State<NewMatchTypePage> {
                             onValueChanged: (value) => setState(() => _distance = value.toInt()),
                             min: 10,
                             max: 100,
+                            holdSpeed: 50,
                           ),
                         ),
                         ArrowLogCard(
@@ -147,6 +148,7 @@ class _NewMatchTypePageState extends State<NewMatchTypePage> {
                             onValueChanged: (value) => setState(() => _rounds = value.toInt()),
                             min: 5,
                             max: 30,
+                            holdSpeed: 100,
                           ),
                         ),
                         ArrowLogCard(
