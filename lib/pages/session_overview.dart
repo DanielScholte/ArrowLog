@@ -75,7 +75,9 @@ class SessionOverviewPage extends StatelessWidget {
     return ArrowLogDismissibleButton(
       key: ValueKey(session.id),
       name: 'Session',
-      onDismiss: () => BlocProvider.of<SessionBloc>(context).add(DeleteSessionEvent(sessionId: session.id)),
+      value: session.name,
+      onRename: (name) => BlocProvider.of<SessionBloc>(context).add(RenameSessionEvent(sessionId: session.id, name: name)),
+      onDelete: () => BlocProvider.of<SessionBloc>(context).add(DeleteSessionEvent(sessionId: session.id)),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => SessionPage(session: session,)
       )),

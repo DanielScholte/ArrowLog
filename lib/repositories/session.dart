@@ -41,6 +41,19 @@ class SessionRepository {
     _loadSessionDetails(session);
   }
 
+  Future<void> renameSession(int id, String name) async {
+    Session session = _getSessionById(id);
+
+    if (session != null) {
+      session.name = name;
+
+      await sessionService.updateSession(session);
+    }
+
+    await sessionService.loadSessions();
+    loadSessionsDetails();
+  }
+
   Future<void> deleteSession(int id) async {
     await sessionService.deleteSession(id);
     await sessionService.loadSessions();

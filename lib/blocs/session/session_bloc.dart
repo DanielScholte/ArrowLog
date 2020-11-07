@@ -38,6 +38,10 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
       await sessionRepository.loadSessions();
       sessionRepository.loadSessionsDetails();
       yield getSessionState();
+    } else if (event is RenameSessionEvent) {
+      yield LoadingSessionsState();
+      await sessionRepository.renameSession(event.sessionId, event.name);
+      yield getSessionState();
     }
   }
 

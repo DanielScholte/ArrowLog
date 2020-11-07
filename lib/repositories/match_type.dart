@@ -23,6 +23,15 @@ class MatchTypeRepository {
     return matchTypes;
   }
 
+  Future<void> renameMatchType(int id, String name) async {
+    MatchType type = matchTypeService.getMatchType(id);
+
+    if (type != null) {
+      type.name = name;
+      await matchTypeService.updateType(type);
+    }
+  }
+
   Future<void> addMatchType(MatchType matchType) => matchTypeService.saveType(matchType);
   Future<void> deleteMatchType(MatchType type) => matchTypeService.deleteType(type);
 }

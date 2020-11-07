@@ -21,6 +21,7 @@ class ArrowLogInputSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _PlusMinusButton(
           type: _PlusMinusType.MINUS,

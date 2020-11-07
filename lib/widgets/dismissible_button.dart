@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class ArrowLogDismissibleButton extends StatelessWidget {
   final VoidCallback onTap;
-  final VoidCallback onDismiss;
+  final VoidCallback onDelete;
+  final Function(String) onRename;
   final Widget child;
   final String name;
+  final String value;
   final EdgeInsets padding;
   final EdgeInsets margin;
 
@@ -15,9 +17,11 @@ class ArrowLogDismissibleButton extends StatelessWidget {
   ArrowLogDismissibleButton({
     @required this.key,
     @required this.onTap,
-    @required this.onDismiss,
+    @required this.onDelete,
     @required this.child,
     @required this.name,
+    @required this.value,
+    @required this.onRename,
     this.padding = const EdgeInsets.all(12.0),
     this.margin = const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
   });
@@ -33,8 +37,57 @@ class ArrowLogDismissibleButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
         child: Dismissible(
           key: key,
-          onDismissed: (_) => onDismiss(),
+          onDismissed: (_) => onDelete(),
           confirmDismiss: (DismissDirection direction) async {
+            if (direction == DismissDirection.startToEnd) {
+              TextEditingController textController = TextEditingController(
+                text: value
+              );
+
+              return await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Enter a new name"),
+                    content: TextField(
+                      controller: textController,
+                      decoration: InputDecoration(
+                        hintText: 'Api Key',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).accentColor.withOpacity(.6),
+                            width: 1.0
+                          )
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).accentColor.withOpacity(1),
+                            width: 2.0,
+                          )
+                        ),
+                      ),
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text("Cancel", style: TextStyle(fontSize: 18.0),),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          if (textController.text != value) {
+                            onRename(textController.text);
+                          }
+                          
+                          Navigator.of(context).pop(false);
+                        },
+                        child: Text("Rename", style: TextStyle(fontSize: 18.0),),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+
             return await showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -55,8 +108,8 @@ class ArrowLogDismissibleButton extends StatelessWidget {
               },
             );
           },
-          background: getDismissableBackground(true),
-          secondaryBackground: getDismissableBackground(false),
+          background: getRenameBackground(),
+          secondaryBackground: getDeleteBackground(),
           child: Padding(
             padding: padding,
             child: child,
@@ -66,20 +119,37 @@ class ArrowLogDismissibleButton extends StatelessWidget {
     );
   }
 
-  Widget getDismissableBackground(bool left) {
+  Widget getRenameBackground() {
+    return Container(
+      color: Colors.orange,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.edit,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            'Rename $name',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18.0
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getDeleteBackground() {
     return Container(
       color: Colors.red,
       child: Row(
-        mainAxisAlignment: left ? MainAxisAlignment.start : MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          if (left)
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.delete,
-                color: Colors.white,
-              ),
-            ),
           Text(
             'Delete $name',
             style: TextStyle(
@@ -87,14 +157,13 @@ class ArrowLogDismissibleButton extends StatelessWidget {
               fontSize: 18.0
             ),
           ),
-          if (!left)
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.delete,
-                color: Colors.white,
-              ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
             ),
+          ),
         ],
       ),
     );
