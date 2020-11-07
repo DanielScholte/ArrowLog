@@ -4,13 +4,17 @@ class ArrowLogCard extends StatelessWidget {
   final Widget header;
   final Widget footer;
   final Widget child;
+  final EdgeInsets paddingHeader;
   final EdgeInsets padding;
+  final EdgeInsets paddingFooter;
   final EdgeInsets margin;
   final CrossAxisAlignment alignment;
 
   ArrowLogCard({
     @required this.child,
+    this.paddingHeader = const EdgeInsets.all(12.0),
     this.padding = const EdgeInsets.all(12.0),
+    this.paddingFooter = const EdgeInsets.all(12.0),
     this.margin = const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     this.alignment = CrossAxisAlignment.center,
     this.header,
@@ -33,13 +37,13 @@ class ArrowLogCard extends StatelessWidget {
           children: <Widget>[
             if (header != null)
               Padding(
-                padding: padding,
+                padding: paddingHeader,
                 child: header,
               ),
             _buildCardContent(context),
             if (footer != null)
               Padding(
-                padding: padding,
+                padding: paddingFooter,
                 child: footer,
               ),
           ],

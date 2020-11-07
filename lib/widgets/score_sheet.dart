@@ -1,5 +1,6 @@
 import 'package:arrow_log/models/match_type/target_face.dart';
 import 'package:arrow_log/models/session/session.dart';
+import 'package:arrow_log/widgets/inline_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,11 @@ class ArrowLogScoreSheet extends StatefulWidget {
   final Session session;
   final int selectedIndex;
   final Function(int) onSelect;
+  final bool interactiveHeader;
 
   ArrowLogScoreSheet({
     @required this.session,
+    this.interactiveHeader = true,
     this.selectedIndex,
     this.onSelect,
   });
@@ -28,7 +31,8 @@ class ArrowLogScoreSheet extends StatefulWidget {
 class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
   _ViewType _viewType = _ViewType.subtotal;
 
-  final double _endWidth = 64;
+  final double _interactiveEndWidth = 64;
+  final double _passiveEndWidth = 80;
 
   @override
   void didUpdateWidget(ArrowLogScoreSheet oldWidget) {
@@ -46,36 +50,8 @@ class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
     int arrows = widget.session.matchType.arrowsPerRound;
 
     return ArrowLogCard(
-      header: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              'Arrows',
-              style: Theme.of(context).textTheme.headline2.copyWith(
-                color: Colors.white
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                _viewType = _viewType == _ViewType.subtotal ? _ViewType.total : _ViewType.subtotal;
-              });
-            },
-            child: Container(
-              width: _endWidth,
-              child: Text(
-                _viewType == _ViewType.subtotal ? 'Sub.' : 'Total',
-                style: Theme.of(context).textTheme.headline2.copyWith(
-                  color: Colors.white
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ],
-      ),
+      paddingHeader: EdgeInsets.symmetric(horizontal: 4.0),
+      header: _buildHeader(),
       child: Column(
         children: Iterable<int>.generate(rounds)
           .map((round) => Row(
@@ -88,19 +64,128 @@ class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
                     .toList(),
                 ),
               ),
-              Container(
-                width: _endWidth,
-                child: _ArrowLogScoreSheetAnimatedValue(
-                  _viewType == _ViewType.subtotal ?
-                  widget.session.state.subTotalScoreSegments[round] :
-                  widget.session.state.totalScoreSegments[round]
-                ),
-              ),
+              _buildSide(round),
             ],
           ))
           .toList(),
       ),
-      footer: Row(
+      footer: _buildFooter(),
+    );
+  }
+
+  Widget _buildHeader() {
+    if (widget.interactiveHeader) {
+      return Row(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, top: 12.0, bottom: 12.0),
+              child: Text(
+                'Arrows',
+                style: Theme.of(context).textTheme.headline2.copyWith(
+                  color: Colors.white
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          ArrowLogInlineButton(
+            text: _viewType == _ViewType.subtotal ? 'Total' : 'Running',
+            margin: EdgeInsets.zero,
+            width: _interactiveEndWidth + 16,
+            textSize: 18.0,
+            color: Colors.white,
+            onTap: () {
+              setState(() {
+                _viewType = _viewType == _ViewType.subtotal ? _ViewType.total : _ViewType.subtotal;
+              });
+            },
+          ),
+        ],
+      );
+    }
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              'Arrows',
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            width: _passiveEndWidth,
+            child: Text(
+              'Total',
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            width: _passiveEndWidth,
+            child: Text(
+              'Running',
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSide(int round) {
+    if (widget.interactiveHeader) {
+      return Container(
+        width: _interactiveEndWidth,
+        child: _ArrowLogScoreSheetAnimatedValue(
+          _viewType == _ViewType.subtotal ?
+          widget.session.state.subTotalScoreSegments[round] :
+          widget.session.state.totalScoreSegments[round]
+        ),
+      );
+    }
+
+    return Container(
+      child: Row(
+        children: [
+          Container(
+            width: _passiveEndWidth,
+            child: Text(
+              widget.session.state.subTotalScoreSegments[round].toString(),
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            width: _passiveEndWidth,
+            child: Text(
+              widget.session.state.totalScoreSegments[round].toString(),
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFooter() {
+    if (widget.interactiveHeader) {
+      return Row(
         children: <Widget>[
           Expanded(
             child: Text(
@@ -112,11 +197,32 @@ class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
             ),
           ),
           Container(
-            width: _endWidth,
+            width: _interactiveEndWidth,
             child: _ArrowLogScoreSheetAnimatedValue(widget.session.state.currentScrore,),
           ),
         ],
-      ),
+      );
+    }
+
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            'End score',
+            style: Theme.of(context).textTheme.headline2.copyWith(
+              color: Colors.white
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Container(
+          width: _passiveEndWidth
+        ),
+        Container(
+          width: _passiveEndWidth,
+          child: _ArrowLogScoreSheetAnimatedValue(widget.session.state.currentScrore,),
+        ),
+      ],
     );
   }
 

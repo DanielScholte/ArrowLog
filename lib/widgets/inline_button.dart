@@ -47,6 +47,8 @@ class ArrowLogInlineButton extends StatelessWidget {
                   fontSize: textSize
                 ),
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),

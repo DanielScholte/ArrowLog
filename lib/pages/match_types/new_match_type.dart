@@ -58,27 +58,24 @@ class _NewMatchTypePageState extends State<NewMatchTypePage> {
                         ),
                         ArrowLogCard(
                           padding: EdgeInsets.all(8.0),
-                          header: Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Distance',
-                                    style: Theme.of(context).textTheme.headline2.copyWith(
-                                      color: Colors.white
-                                    ),
+                          header: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Distance',
+                                  style: Theme.of(context).textTheme.headline2.copyWith(
+                                    color: Colors.white
                                   ),
                                 ),
-                                Text(
-                                  '${_distance}m',
-                                  style: Theme.of(context).textTheme.headline2.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Text(
+                                '${_distance}m',
+                                style: Theme.of(context).textTheme.headline2.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300
+                                ),
+                              )
+                            ],
                           ),
                           child: ArrowLogInputSlider(
                             value: _distance.toDouble(),
@@ -90,27 +87,24 @@ class _NewMatchTypePageState extends State<NewMatchTypePage> {
                         ),
                         ArrowLogCard(
                           padding: EdgeInsets.all(8.0),
-                          header: Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Arrows per round',
-                                    style: Theme.of(context).textTheme.headline2.copyWith(
-                                      color: Colors.white
-                                    ),
+                          header: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Arrows per round',
+                                  style: Theme.of(context).textTheme.headline2.copyWith(
+                                    color: Colors.white
                                   ),
                                 ),
-                                Text(
-                                  '$_arrows',
-                                  style: Theme.of(context).textTheme.headline2.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Text(
+                                '$_arrows',
+                                style: Theme.of(context).textTheme.headline2.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300
+                                ),
+                              )
+                            ],
                           ),
                           child: ArrowLogInputSlider(
                             value: _arrows.toDouble(),
@@ -121,27 +115,24 @@ class _NewMatchTypePageState extends State<NewMatchTypePage> {
                         ),
                         ArrowLogCard(
                           padding: EdgeInsets.all(8.0),
-                          header: Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Rounds',
-                                    style: Theme.of(context).textTheme.headline2.copyWith(
-                                      color: Colors.white
-                                    ),
+                          header: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Rounds',
+                                  style: Theme.of(context).textTheme.headline2.copyWith(
+                                    color: Colors.white
                                   ),
                                 ),
-                                Text(
-                                  '$_rounds',
-                                  style: Theme.of(context).textTheme.headline2.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Text(
+                                '$_rounds',
+                                style: Theme.of(context).textTheme.headline2.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300
+                                ),
+                              )
+                            ],
                           ),
                           child: ArrowLogInputSlider(
                             value: _rounds.toDouble(),
