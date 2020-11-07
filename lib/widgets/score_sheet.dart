@@ -91,6 +91,7 @@ class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
           ),
           ArrowLogInlineButton(
             text: _viewType == _ViewType.subtotal ? 'Total' : 'Running',
+            padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 2.0),
             margin: EdgeInsets.zero,
             width: _interactiveEndWidth + 16,
             textSize: 18.0,
