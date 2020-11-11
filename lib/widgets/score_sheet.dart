@@ -31,7 +31,7 @@ class ArrowLogScoreSheet extends StatefulWidget {
 class _ArrowLogScoreSheetState extends State<ArrowLogScoreSheet> {
   _ViewType _viewType = _ViewType.subtotal;
 
-  final double _interactiveEndWidth = 64;
+  final double _interactiveEndWidth = 72;
   final double _passiveEndWidth = 80;
 
   @override
@@ -338,6 +338,7 @@ class __ArrowLogScoreSheetScoreState extends State<_ArrowLogScoreSheetScore> wit
               style: Theme.of(context).textTheme.headline2.copyWith(
                 color: widget.score != null ? widget.score.foregroundColor : Colors.black
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
