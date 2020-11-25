@@ -20,3 +20,13 @@ class DeleteMatchTypeEvent extends MatchtypeEvent {
     @required this.matchType,
   });
 }
+
+class RenameMatchTypeEvent extends MatchtypeEvent {
+  final int matchTypeId;
+  final String name;
+
+  RenameMatchTypeEvent({
+    @required this.matchTypeId,
+    @required this.name,
+  });
+}

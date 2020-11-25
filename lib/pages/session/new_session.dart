@@ -70,13 +70,13 @@ class _NewSessionPageState extends State<NewSessionPage> {
                     BlocBuilder<MatchtypeBloc, MatchtypeState>(
                       builder: (context, matchTypeState) {
                         return ArrowLogCard(
-                          padding: EdgeInsets.zero,
+                          paddingHeader: EdgeInsets.symmetric(horizontal: 4.0),
                           header: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
                                   child: Text(
                                     'Match type',
                                     style: Theme.of(context).textTheme.headline2.copyWith(
@@ -87,9 +87,9 @@ class _NewSessionPageState extends State<NewSessionPage> {
                               ),
                               ArrowLogInlineButton(
                                 text: 'Manage types',
-                                margin: EdgeInsets.only(right: 4.0),
                                 width: 175.0,
                                 textSize: 18.0,
+                                margin: EdgeInsets.zero,
                                 color: Colors.white,
                                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => MatchTypeOverviewPage()

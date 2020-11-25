@@ -33,6 +33,14 @@ class SessionSetScoresEvent extends SessionEvent {
   });
 }
 
-class RefreshSessionsEvent extends SessionEvent {
+class RefreshSessionsEvent extends SessionEvent {}
 
+class RenameSessionEvent extends SessionEvent {
+  final int sessionId;
+  final String name;
+
+  RenameSessionEvent({
+    @required this.sessionId,
+    @required this.name,
+  });
 }

@@ -15,8 +15,10 @@ class ArrowLogInputDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(12.0),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        canvasColor: Colors.white
+      ),
       child: DropdownButton(
         isExpanded: true,
         style: TextStyle(color: Colors.white),
@@ -36,7 +38,7 @@ class ArrowLogInputDropdown extends StatelessWidget {
             .map((o) => DefaultTextStyle(
               style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),
               child: Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding: EdgeInsets.only(top: 12.0),
                 child: Text(o.text),
               ),
             ))
@@ -50,7 +52,10 @@ class ArrowLogInputDropdown extends StatelessWidget {
         items: options
             .map((o) => DropdownMenuItem(
               value: o.value,
-              child: Text(o.text, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black)),
+              child: Text(
+                o.text,
+                style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black)
+              ),
             ))
             .toList(),
         onChanged: onValueChanged,

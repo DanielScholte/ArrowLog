@@ -28,6 +28,8 @@ class MatchtypeBloc extends Bloc<MatchtypeEvent, MatchtypeState> {
       await matchTypeRepository.addMatchType(event.matchType);
     } else if (event is DeleteMatchTypeEvent) {
       await matchTypeRepository.deleteMatchType(event.matchType);
+    } else if (event is RenameMatchTypeEvent) {
+      await matchTypeRepository.renameMatchType(event.matchTypeId, event.name);
     }
 
     yield MatchTypesState(

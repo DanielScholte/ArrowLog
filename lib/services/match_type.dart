@@ -35,6 +35,21 @@ class MatchTypeService {
     return;
   }
 
+  Future<void> updateType(MatchType type) async {
+    Database database = await _getDatabase();
+
+    await database.update(
+      'match_types',
+      type.toDb(),
+      where: 'id = ?',
+      whereArgs: [type.id],
+    );
+
+    await loadMatchTypes(database: database);
+
+    return;
+  }
+
   Future<void> deleteType(MatchType type) async {
     Database database = await _getDatabase();
 

@@ -74,6 +74,7 @@ class ArrowLogSessionShare extends StatelessWidget {
                 ),
                 ArrowLogScoreSheet(
                   session: session,
+                  interactiveHeader: false,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),

@@ -147,7 +147,7 @@ class _SessionPageState extends State<SessionPage> {
 
   Future<void> _share(BuildContext context, Session session) {
     Size size = Size(
-      384,
+      276 + (session.matchType.arrowsPerRound > 3 ? session.matchType.arrowsPerRound : 3) * 36.0,
       334 + session.matchType.rounds * 36.0
     );
 

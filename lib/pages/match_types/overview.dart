@@ -64,7 +64,9 @@ class MatchTypeOverviewPage extends StatelessWidget {
     return ArrowLogDismissibleButton(
       key: ValueKey(matchType.id),
       name: 'Match Type',
-      onDismiss: () => BlocProvider.of<MatchtypeBloc>(context).add(DeleteMatchTypeEvent(matchType: matchType)),
+      value: matchType.name,
+      onRename: (name) => BlocProvider.of<MatchtypeBloc>(context).add(RenameMatchTypeEvent(matchTypeId: matchType.id, name: name)),
+      onDelete: () => BlocProvider.of<MatchtypeBloc>(context).add(DeleteMatchTypeEvent(matchType: matchType)),
       onTap: null,
       child: Column(
         children: <Widget>[
